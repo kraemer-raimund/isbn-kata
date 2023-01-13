@@ -1,5 +1,7 @@
 # ISBN Kata - Refactoring Legacy Code
 
+branch: `refactoring-legacy-code-starting-point`
+
 > # This kata is still work in progress. Please try the TDD implementation variant for now.
 
 ## Refactoring Goal

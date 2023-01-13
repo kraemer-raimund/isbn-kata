@@ -1,5 +1,7 @@
 # ISBN Kata - TDD Implementation
 
+branch: `tdd-implementation-starting-point`
+
 ## Design Constraints
 
 - No static utils.
