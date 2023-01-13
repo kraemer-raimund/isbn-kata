@@ -31,7 +31,7 @@ public class BookSearchViewModel {
     }
 
     private void onBookFound(Book book) {
-        var searchResult = String.format("%s, %s, %s", book.getIsbn(), book.getName(), book.getAuthor());
+        var searchResult = String.format("%s, %s, %s", book.getIsbn(), book.getTitle(), book.getAuthor());
         searchResultHandler.accept(searchResult);
     }
 
