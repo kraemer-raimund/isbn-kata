@@ -14,7 +14,7 @@ This kata can be practiced in different variants, depending on the skill to focu
 
 - ### [TDD Implementation](tdd-implementation-kata.md)
   branch: `tdd-implementation-starting-point`
-- ### ~~[Refactoring Legacy Code](refactoring-legacy-code-kata.md)~~ *(work in progress, please try the other variant for now!)*
+- ### [Refactoring Legacy Code](refactoring-legacy-code-kata.md)
   branch: `refactoring-legacy-code-starting-point`
   
 

@@ -2,8 +2,6 @@
 
 branch: `refactoring-legacy-code-starting-point`
 
-> # This kata is still work in progress. Please try the TDD implementation variant for now.
-
 In this kata, the code base already fulfills all of the requirements of the [TDD implementation variant](tdd-implementation-kata.md), but the code smells.
 
 ## Refactoring Goal
