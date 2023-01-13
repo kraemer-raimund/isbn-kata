@@ -2,6 +2,7 @@ package org.example.presentation;
 
 import org.example.domain.Book;
 import org.example.domain.BookRepository;
+import org.example.utils.StringUtils;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -25,7 +26,7 @@ public class BookSearchViewModel {
     }
 
     public void searchBook(String isbn) {
-        if (!isWellFormedIsbn(isbn)) {
+        if (!StringUtils.isWellFormedIsbn(isbn)) {
             onIllFormedIsbn(isbn);
             return;
         }
@@ -35,12 +36,6 @@ public class BookSearchViewModel {
                 this::onBookFound,
                 () -> onBookNotFound(isbn)
         );
-    }
-
-    private boolean isWellFormedIsbn(String potentialIsbn) {
-        // For now, we only accept this hardcoded string. In the following steps, we will implement
-        // the actual validation rules.
-        return potentialIsbn.equals("978-3-16-148410-0");
     }
 
     private void onBookFound(Book book) {
