@@ -2,6 +2,8 @@
 
 branch: `tdd-implementation-starting-point`
 
+In this kata, an existing code base needs to be adapted to new requirements.
+
 ## Design Constraints
 
 - No static utils.
