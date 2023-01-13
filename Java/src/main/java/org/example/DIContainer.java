@@ -12,7 +12,9 @@ public class DIContainer {
 
     public static BookSearchViewModel instantiateBookSearchViewModel(
             Consumer<String> searchResultHandler,
+            Consumer<String> illFormedIsbnErrorHandler,
             Consumer<String> bookNotFoundErrorHandler) {
-        return new BookSearchViewModel(bookRepository, searchResultHandler, bookNotFoundErrorHandler);
+        return new BookSearchViewModel(
+                bookRepository, searchResultHandler, illFormedIsbnErrorHandler, bookNotFoundErrorHandler);
     }
 }

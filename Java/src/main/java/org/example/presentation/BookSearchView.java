@@ -5,8 +5,8 @@ import org.example.DIContainer;
 public class BookSearchView {
 
     private static final BookSearchView bookSearchView = new BookSearchView();
-    private final BookSearchViewModel bookSearchViewModel =
-            DIContainer.instantiateBookSearchViewModel(this::showSearchResult, this::showBookNotFoundErrorMessage);
+    private final BookSearchViewModel bookSearchViewModel = DIContainer.instantiateBookSearchViewModel(
+            this::showSearchResult, this::showInvalidIsbnErrorMessage, this::showBookNotFoundErrorMessage);
 
     public static void main(String[] args) {
         bookSearchView.onSearchSubmitted(args);
@@ -23,6 +23,11 @@ public class BookSearchView {
 
     private void showSearchResult(String result) {
         System.out.println(result);
+    }
+
+    private void showInvalidIsbnErrorMessage(String illFormedIsbn) {
+        var errorMessage = String.format("The provided search phrase `%s` is not a well-formed ISBN.", illFormedIsbn);
+        System.out.println(errorMessage);
     }
 
     private void showBookNotFoundErrorMessage(String isbn) {
