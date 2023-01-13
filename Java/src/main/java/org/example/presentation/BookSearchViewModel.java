@@ -39,8 +39,8 @@ public class BookSearchViewModel {
     }
 
     private void onBookFound(Book book) {
-        var isbn = book.getIsbn();
-        var ean = convertToEan(isbn);
+        var isbn = StringUtils.displayInCorrectFormatBasedOnLength(book.getIsbn());
+        var ean = convertToEan(book.getIsbn());
         var title = book.getTitle();
         var author = book.getAuthor();
 
@@ -69,6 +69,6 @@ public class BookSearchViewModel {
     }
 
     private void onBookNotFound(String isbn) {
-        bookNotFoundErrorHandler.accept(isbn);
+        bookNotFoundErrorHandler.accept(StringUtils.displayInCorrectFormatBasedOnLength(isbn));
     }
 }
