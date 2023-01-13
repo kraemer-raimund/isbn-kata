@@ -39,8 +39,29 @@ public class BookSearchViewModel {
     }
 
     private void onBookFound(Book book) {
-        var searchResult = String.format("%s, %s, %s", book.getIsbn(), book.getTitle(), book.getAuthor());
+        var isbn = book.getIsbn();
+        var ean = convertToEan(isbn);
+        var title = book.getTitle();
+        var author = book.getAuthor();
+
+        var searchResult = String.format("%s, %s, %s, %s", isbn, ean, title, author);
         searchResultHandler.accept(searchResult);
+    }
+
+    private String convertToEan(String isbn) {
+        var isbnWithoutSeparators = StringUtils.removeSeparators(isbn);
+        String prefix;
+        if (isbnWithoutSeparators.length() == 10) {
+            prefix = "978";
+        } else if (isbnWithoutSeparators.length() == 13) {
+            prefix = "";
+        } else {
+            throw new RuntimeException("Should never happen. If it does, then // TODO debug it.");
+        }
+        return new StringBuilder()
+                .append(prefix)
+                .append(isbnWithoutSeparators)
+                .toString();
     }
 
     private void onIllFormedIsbn(String illFormedIsbn) {

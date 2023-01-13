@@ -61,4 +61,8 @@ public class StringUtils {
             return false;
         }
     }
+
+    public static String removeSeparators(String string) {
+        return string.replace(" ", "").replace("-", "");
+    }
 }
