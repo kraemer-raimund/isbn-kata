@@ -4,6 +4,8 @@ branch: `refactoring-legacy-code-starting-point`
 
 > # This kata is still work in progress. Please try the TDD implementation variant for now.
 
+In this kata, the code base already fulfills all of the requirements of the [TDD implementation variant](tdd-implementation-kata.md), but the code smells.
+
 ## Refactoring Goal
 
 - No static utils.
@@ -12,6 +14,8 @@ branch: `refactoring-legacy-code-starting-point`
 
 - No changing of existing code without writing a test first.
 - No unit tests for static methods at any point.
+  <details><summary>Why not?</summary>
+  While the existing code is not clean, it is considered trusted and correct in its current state. We want to add tests to improve the existing code and refactor it safely, but we do not want to add any tests that lock in the existing code smells.
 
 ___
 
