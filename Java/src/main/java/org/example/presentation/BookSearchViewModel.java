@@ -44,7 +44,7 @@ public class BookSearchViewModel {
         var title = book.getTitle();
         var author = book.getAuthor();
 
-        var searchResult = String.format("%s, %s, %s, %s", isbn, ean, title, author);
+        var searchResult = String.format("ISBN: %s\nEAN: %s\nBook title: %s\nAuthor: %s", isbn, ean, title, author);
         searchResultHandler.accept(searchResult);
     }
 

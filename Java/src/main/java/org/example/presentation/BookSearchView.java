@@ -2,42 +2,72 @@ package org.example.presentation;
 
 import org.example.DIContainer;
 
-public class BookSearchView {
+import javax.swing.*;
+import java.awt.*;
 
-    private static final BookSearchView bookSearchView = new BookSearchView();
+public class BookSearchView extends JFrame {
+
+    private static final String exampleIsbn = "978-3-16-148410-0";
+
     private final BookSearchViewModel bookSearchViewModel = DIContainer.instantiateBookSearchViewModel(
-            this::showSearchResult, this::showInvalidIsbnErrorMessage, this::showBookNotFoundErrorMessage);
+            this::showSearchResult,
+            this::showInvalidIsbnErrorMessage,
+            this::showBookNotFoundErrorMessage
+    );
 
-    public static void main(String[] args) {
-        bookSearchView.onSearchSubmitted(args);
+    private final JTextPane resultTextPane;
+
+    public BookSearchView(JTextPane resultTextPane) {
+        this.resultTextPane = resultTextPane;
     }
 
-    private void onSearchSubmitted(String[] args) {
-        if (isCommandLineArgumentProvided(args)) {
-            bookSearchViewModel.searchBook(args[0]);
-        } else {
-            // Provide the ISBN here if you do not want to use the command line arguments.
-            bookSearchViewModel.searchBook("978-3-16-148410-0");
-        }
+    public static void main(String[] args) {
+        final var panel = new JPanel();
+        panel.setPreferredSize(new Dimension(600, 400));
+
+        final var isbnLabel = new JLabel("ISBN");
+        panel.add(isbnLabel);
+
+        final var isbnTextField = new JTextField();
+        isbnTextField.setPreferredSize(new Dimension(200, 24));
+        isbnTextField.setText(exampleIsbn);
+        panel.add(isbnTextField);
+
+        final var searchButton = new JButton("Search");
+        panel.add(searchButton);
+
+        final var resultPane = new JTextPane();
+        resultPane.setPreferredSize(panel.getPreferredSize());
+        resultPane.setEditable(false);
+        panel.add(resultPane);
+
+        final var view = new BookSearchView(resultPane);
+        view.setLayout(new FlowLayout(FlowLayout.CENTER, 8, 8));
+        view.add(panel);
+        view.pack();
+        view.setTitle("Book Library Plus – Premium Gold Edition Season Pass");
+        view.setVisible(true);
+        view.setResizable(true);
+        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        searchButton.addActionListener(event -> view.onSearchSubmitted(isbnTextField.getText()));
+    }
+
+    public void onSearchSubmitted(String isbn) {
+        bookSearchViewModel.searchBook(isbn);
     }
 
     private void showSearchResult(String result) {
-        System.out.println(result);
+        resultTextPane.setText(result);
     }
 
     private void showInvalidIsbnErrorMessage(String illFormedIsbn) {
         var errorMessage = String.format("The provided search phrase `%s` is not a well-formed ISBN.", illFormedIsbn);
-        System.out.println(errorMessage);
+        resultTextPane.setText(errorMessage);
     }
 
     private void showBookNotFoundErrorMessage(String isbn) {
         var errorMessage = String.format("No book found for the provided ISBN %s.", isbn);
-        System.out.println(errorMessage);
-    }
-
-    private static boolean isCommandLineArgumentProvided(String[] args) {
-        return args.length > 0
-                && !(args[0] == null)
-                && !(args[0].isBlank());
+        resultTextPane.setText(errorMessage);
     }
 }
