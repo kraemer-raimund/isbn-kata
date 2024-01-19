@@ -4,9 +4,11 @@ A coding kata that focuses on **design** and **TDD**.
 
 ## Application
 
-The program is a book library administration app. You can consider the provided code to be a small subset of the full application.
+The program is a book library administration app. You can consider the provided code to be
+a small subset of the full application.
 
-If you open the `BookSearchView` you find the `main` method. In order to avoid depending on a full UI framework, we simulate a simple UI. Each time the main method runs and calls `onSearchSubmitted`, it is the equivalent of the user pressing "Enter" in their search bar. The search input is read from the command line arguments (or can alternatively be hardcoded in the `onSearchSubmitted` method).
+If you open the `BookSearchView` you find the `main` method. When you run the application,
+the search field will already be prefilled with a valid ISBN for your convenience.
 
 ## Variants
 
