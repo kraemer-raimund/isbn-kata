@@ -1,7 +1,16 @@
 package org.example.utils;
 
+/**
+ * Strings the utils.
+ */
 public class StringUtils {
 
+    /**
+     * Determines whether the string represents a well-formed ISBN.
+     *
+     * @param potentialIsbn
+     * @return a boolean
+     */
     public static boolean isWellFormedIsbn(String potentialIsbn) {
         if (potentialIsbn != null && !potentialIsbn.isBlank()) {
             int lengthWithoutSeparators = potentialIsbn.replace(" ", "").replace("-", "").length();
