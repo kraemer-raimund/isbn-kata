@@ -84,11 +84,15 @@ public class StringUtils {
         return null;
     }
 
-    public static String replaceAllHyphens(String string, String replacement) {
-        return string.replace("-", replacement);
+    private static String replaceAllHyphens(String string, String replacement) {
+        return replaceAllOccurrences(string, "-", replacement);
     }
 
-    public static String replaceAllSpaces(String string, String replacement) {
-        return string.replace(" ", replacement);
+    private static String replaceAllSpaces(String string, String replacement) {
+        return replaceAllOccurrences(string, " ", replacement);
+    }
+
+    private static String replaceAllOccurrences(String string, String toReplace, String replacement) {
+        return string.replace(toReplace, replacement);
     }
 }
