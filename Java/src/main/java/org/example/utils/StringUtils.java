@@ -71,6 +71,26 @@ public class StringUtils {
         }
     }
 
+    // Convert ISBN to EAN (European Article Number). Make sure the string is actually an ISBN!
+    public static String convertToEan(String isbn) {
+        var isbnWithoutSeparators = removeSeparators(isbn);
+        String prefix;
+        if (isbnWithoutSeparators.length() == 10) {
+            // Special EAN country code for books, added to 10-digit ISBNs regardless of country of origin.
+            prefix = "978";
+        } else if (isbnWithoutSeparators.length() == 13) {
+            // 13-digit ISBNs are directly compatible with 13-digit EANs by removing the separators.
+            prefix = "";
+        } else {
+            throw new RuntimeException("Should never happen. If it does, then // TODO debug it.");
+        }
+        // I read that StringBuilder is faster than concatenation. It was on the internet, so it must be true.
+        return new StringBuilder()
+                .append(prefix)
+                .append(isbnWithoutSeparators)
+                .toString();
+    }
+
     public static String removeSeparators(String string) {
         return string.replace(" ", "").replace("-", "");
     }
