@@ -69,4 +69,18 @@ class StringUtilsTest {
                 .describedAs(description)
                 .isEqualTo(expectedEan);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "123-4-56-789012-3, 123-4-56-789012-3, 13-digit ISBNs are always formatted with hyphens",
+            "123 4 56 789012 3, 123-4-56-789012-3, 13-digit ISBNs are always formatted with hyphens",
+            "123-4567890, 123 4567890, 10-digit ISBNs are always formatted with spaces",
+            "123 4567890, 123 4567890, 10-digit ISBNs are always formatted with spaces",
+    })
+    void formatsIsbnAccordingToConvention(String isbn, String expectedFormatted, String description) {
+        var formattedIsbn = StringUtils.displayInCorrectFormatBasedOnLength(isbn);
+        assertThat(formattedIsbn)
+                .describedAs(description)
+                .isEqualTo(expectedFormatted);
+    }
 }
