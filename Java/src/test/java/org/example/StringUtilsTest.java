@@ -51,4 +51,22 @@ class StringUtilsTest {
                 .describedAs(description)
                 .isTrue();
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "123-4-56-789012-3, 1234567890123, 13-digit ISBN becomes EAN by removing separators",
+            "456 7 42 133769 5, 4567421337695, 13-digit ISBN becomes EAN by removing separators",
+            "4-44156-7890-1-23, 4441567890123, 13-digit ISBN becomes EAN by removing separators",
+            "5 4 3 2 109871337, 5432109871337, 13-digit ISBN becomes EAN by removing separators",
+            "12345678-90, 9781234567890, 10-digit ISBN becomes EAN by removing separators and adding prefix 978",
+            "123-4567890, 9781234567890, 10-digit ISBN becomes EAN by removing separators and adding prefix 978",
+            "123 4567890, 9781234567890, 10-digit ISBN becomes EAN by removing separators and adding prefix 978",
+            "64632879 42, 9786463287942, 10-digit ISBN becomes EAN by removing separators and adding prefix 978",
+    })
+    void convertsIsbnToEan(String isbn, String expectedEan, String description) {
+        var ean = StringUtils.convertToEan(isbn);
+        assertThat(ean)
+                .describedAs(description)
+                .isEqualTo(expectedEan);
+    }
 }
